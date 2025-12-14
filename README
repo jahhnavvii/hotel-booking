@@ -1,0 +1,151 @@
+Hotel Booking Analytics Dashboard
+
+1. Problem Statement
+
+Hotels generate large volumes of booking data from multiple sources such as reservation systems, online travel agencies, and manual entries. This raw data often contains:
+
+* Inconsistent formats (dates, text casing)
+* Invalid or missing values (emails, dates)
+* Negative or incorrect monetary values
+* Unstandardized booking statuses
+
+Because of these data quality issues, it becomes difficult for business stakeholders to:
+
+* Track revenue accurately
+* Understand booking trends over time
+* Analyze customer behavior and room performance
+* Make data-driven decisions
+
+The challenge is to **transform raw hotel booking data into a clean, reliable, and analytics-ready dataset** and present meaningful insights through a dashboard.
+
+---
+
+2. Why This Project?
+
+This project was built to:
+
+* Simulate a **real-world data engineering pipeline**
+* Apply **Bronze–Silver–Gold architecture** in Snowflake
+* Perform data validation, cleansing, and transformation
+* Enable **business intelligence and KPI tracking** through a dashboard
+
+It demonstrates how raw data can be converted into trusted insights using structured data layers.
+
+---
+
+3. Architecture Overview
+
+The solution follows a **3-layer data warehouse design**:
+
+🥉 Bronze Layer – Raw Data
+
+* Stores raw hotel booking data exactly as received
+* All columns are stored as STRING
+* Acts as a historical and auditable data source
+
+🥈 Silver Layer – Cleaned & Validated Data
+
+* Data is cleaned, standardized, and validated
+* Correct data types are applied (DATE, INT, FLOAT)
+* Business rules are enforced
+* Only valid records are promoted
+
+🥇 Gold Layer – Analytics & Reporting
+
+* Aggregated and business-ready tables
+* Optimized for dashboards and reporting
+* Provides KPIs and trend analysis
+
+---
+
+4. Data Processing Logic
+
+Bronze → Silver Transformations
+
+The following rules were applied while moving data to the Silver layer:
+
+* **Text Standardization**: Trimmed spaces and applied proper casing
+* **Email Validation**: Kept only valid email formats, others set to NULL
+* **Date Validation**: Removed records with invalid or illogical dates
+* **Revenue Correction**: Converted negative amounts to positive using ABS()
+* **Booking Status Normalization**: Standardized inconsistent status values
+
+Only records passing all validations are inserted into the Silver table.
+
+---
+
+5. Gold Layer Tables
+
+1. `GOLD_BOOKING_CLEAN`
+
+* Fully cleaned, row-level booking data
+* Used as the main fact table for analysis
+
+2. `GOLD_AGG_DAILY_BOOKING`
+
+* Aggregated daily bookings and revenue
+* Supports time-series analysis
+
+3. `GOLD_AGG_HOTEL_CITY_SALES`
+
+* Aggregated revenue by hotel city
+* Helps identify top-performing locations
+
+---
+
+6. Dashboard Overview
+
+The dashboard provides a **high-level and detailed view of hotel performance**.
+
+Key Metrics (KPIs)
+
+* **Total Revenue**: Overall revenue generated
+* **Total Bookings**: Number of completed bookings
+* **Total Guests**: Total guests served
+* **Average Booking Value**: Revenue per booking
+
+Visual Insights
+
+* **Bookings Over Time**: Trend of bookings and revenue
+* **Top Cities by Revenue**: Identifies high-revenue locations
+* **Room Type Distribution**: Demand across room categories
+* **Booking Status Breakdown**: Confirmed vs other statuses
+
+These visuals help stakeholders quickly understand performance and trends.
+
+---
+
+## 7. How This Dashboard Solves the Problem
+
+* Converts messy raw data into **trusted analytics-ready data**
+* Enables quick decision-making using clear KPIs
+* Helps hotels identify:
+
+  * Revenue growth or decline
+  * Popular room types
+  * High-performing cities
+  * Seasonal booking patterns
+
+The dashboard bridges the gap between **raw operational data and business intelligence**.
+
+---
+
+8. Tools & Technologies Used
+
+* **Snowflake** – Cloud data warehouse
+* **SQL** – Data transformation and aggregation
+* **Bronze–Silver–Gold Architecture** – Data modeling approach
+* **Snowflake Dashboards / BI Tool** – Visualization and reporting
+
+---
+
+9. Conclusion
+
+This project demonstrates an end-to-end data engineering workflow:
+
+* Ingesting raw data
+* Cleaning and validating it
+* Building analytical models
+* Delivering actionable insights through a dashboard
+
+It reflects real-world data warehouse design and is suitable for both **academic learning and portfolio demonstration**.
